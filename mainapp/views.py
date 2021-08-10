@@ -36,7 +36,7 @@ def SearchQuery(request):
             response = []
             for q in qs:
                 count += 1
-                if count <= 5*qs.pagesize:
+                if count <= 3*qs.pagesize:
                     response.append(q)
                 else:
                     break
