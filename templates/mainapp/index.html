@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Search StackOverflow</title>
+</head>
+<body>
+<style>
+    #content {
+        font-family: "Droid Sans";
+    }
+    #link:hover {
+        cursor: pointer;
+        color: blue;
+    }
+</style>
+    <div class="container" id="content">
+        <div class="offset-sm-3">
+            <br><br><br>
+            <h2 class="text-danger">StackOverflow Search</h2>
+            <br>
+            <form action={% url 'search_query' %} method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="term" class="mr-3">Search Anything</label>
+                    <input type="text" name="term" value="" id="term">
+                    <button class="btn btn-outline-danger ml-2" type="submit">Go</button>
+                </div>
+            </form>
+            <form action={% url 'search_result' %} method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="userterm" class="mr-3">Search Stats by User</label>
+                    <input type="number" name="userterm" value="" id="userterm">
+                    <button class="btn btn-outline-danger ml-2" type="submit">Go</button>
+                    <br>
+                    <p class="offset-sm-3" id="link" style="text-decoration: underline" onclick="dropFunction()">More Filters</p>
+                </div>
+            </form>
+            <div class="container" id="morefilters" style="display: none">
+                <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="username" class="mr-5">Page</label>
+                                <input class="parameter-input number-type" id="param-page" type="text" name="page">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="mr-5" for="emailfield">Pagesize</label>
+                                <input type="email" name="email" value="{{ email }}" id="emailfield">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="mr-4" for="phonefield">fromdate</label>
+                                <input class="parameter-input hasDatepicker date-type" id="param-fromdate" type="text" name="fromdate">                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="username" class="mr-5">todate</label>
+                                <input type="text" name="username" value="{{ username }}" id="username">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="mr-5" for="emailfield">order</label>
+                                <select name="order" id="param-order" class="parameter-select"><option>desc</option><option>asc</option></select>                            </div>
+                            <div class="col-sm-4">
+                                <label class="mr-4" for="phonefield">sort</label>
+                                <select name="sort" id="param-sort" class="parameter-select"><option>activity</option><option>creation</option><option>votes</option></select>                            </div>
+                        </div>
+                    <br>
+                        <div class="form-group">
+                            <button class="btn btn-outline-danger" id="submitbutton" type="submit">Search</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+    function dropFunction() {
+        var x = document.getElementById("morefilters");
+        document.getElementById("term").disabled = true;
+        document.getElementById("userterm").disabled = true;
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+        else {
+            document.getElementById("userterm").disabled = false;
+            document.getElementById("term").disabled = false;
+            x.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

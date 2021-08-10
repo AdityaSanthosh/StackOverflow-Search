@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+<style>
+    #content {
+        font-family: "Droid Sans";
+    }
+    #link:hover {
+        cursor: pointer;
+        color: red;
+    }
+</style>
+    <div class="container" id="content">
+        <h3>Search Result</h3>
+        <div class="row">
+            <div class="col-12">
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">Question ID</th>
+                                    <th scope="col">Question Title</th>
+                                    <th scope="col">Tags</th>
+                                    <th scope="col">Date of Recent Activity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for q in response.object_list %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <td>{{ q.question_id }}</td>
+                                        <td><a id="link" href="{{q.link}}/">{{ q.title }}</a></td>
+                                        <td>{{ q.tags }}</td>
+                                        <td>{{ q.last_activity_date }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if response.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a class="btn btn-outline-info mb-4" href="?page={{ response.previous_page_number }}">Prev</a>
+                        {% endif %}
+                         <span>
+                             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if response.has_next %}
+                            <a href="?page={{ response.next_page_number }}">Next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
