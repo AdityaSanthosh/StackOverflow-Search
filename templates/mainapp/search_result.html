@@ -42,15 +42,15 @@
                             </tbody>
                         </table>
                         {% if response.has_previous %}
-                                <a href="?page=1">&laquo; first</a>
-                                <a class="btn btn-outline-info mb-4" href="?page={{ response.previous_page_number }}">Prev</a>
+                                <a href="{% url 'search_result' %}?page=1">&laquo; first</a>
+                                <a class="btn btn-outline-info mb-4" href="{% url 'search_result' %}?page={{ response.previous_page_number }}">Prev</a>
                         {% endif %}
                          <span>
                              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                         </span>
                         {% if response.has_next %}
-                            <a href="?page={{ response.next_page_number }}">Next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            <a href="{% url 'search_result?page= response.next_page_number' %}">Next</a>
+                            <a href="{% url 'search_result' %}?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
                         {% endif %}
                     </div>
             </div>
