@@ -32,6 +32,7 @@ def SearchQuery(request):
             so = stackexchange.Site(stackexchange.StackOverflow, impose_throttling=True)
             search_term = request.POST["term"]
             qs = so.search(intitle=search_term)
+            order = request.POST["order"]
             count = 0
             response = []
             for q in qs:
