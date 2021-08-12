@@ -33,11 +33,12 @@ def SearchQuery(request):
             search_term = request.POST["term"]
             qs = so.search(intitle=search_term)
             order = request.POST["order"]
+            pagesize = int(request.POST["pagesize"])
             count = 0
             response = []
             for q in qs:
                 count += 1
-                if count <= 3*qs.pagesize:
+                if count <= pagesize:
                     response.append(q)
                 else:
                     break
