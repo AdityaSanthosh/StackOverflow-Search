@@ -26,6 +26,10 @@
                     <label for="term" class="mr-3">Search Anything</label>
                     <input type="text" name="term" value="" id="term">
                     <button class="btn btn-outline-danger ml-2" type="submit">Go</button>
+                    <div class="col-sm-4">
+                        <label class="mr-5" for="order">order</label>
+                        <select name="order" id="order"><option value="desc">desc</option><option value="asc">asc</option></select>
+                    </div>
                 </div>
             </form>
             <form action={% url 'search_result' %} method="post">
