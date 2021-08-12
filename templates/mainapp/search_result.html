@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for q in response.object_list %}
+                                {% for q in response %}
                                     <tr>
                                         <th scope="row">{{ forloop.counter }}</th>
                                         <td>{{ q.question_id }}</td>
