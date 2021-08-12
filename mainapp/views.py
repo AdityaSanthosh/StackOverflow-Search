@@ -40,10 +40,9 @@ def SearchQuery(request):
                     response.append(q)
                 else:
                     break
-            p = Paginator(response, 30)
-            page_num = request.GET.get('page')
-            page_obj = p.get_page(page_num)
+            if order == "desc":
+                response.reverse()
             context = {
-                'response': page_obj,
+                'response': response,
             }
             return render(request, template_name='mainapp/search_result.html', context=context)
