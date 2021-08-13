@@ -33,7 +33,11 @@ def SearchQuery(request):
             search_term = request.POST["term"]
             qs = so.search(intitle=search_term)
             order = request.POST["order"]
-            pagesize = int(request.POST["pagesize"])
+            requested_pagesize = request.POST["pagesize"]
+            if requested_pagesize == '':
+                pagesize = 0
+            else:
+                pagesize = int(requested_pagesize)
             count = 0
             response = []
             for q in qs:
